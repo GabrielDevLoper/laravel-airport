@@ -1,7 +1,6 @@
 <?php
 
-Route::get('/home', "Panel\PanelController@index")->name('home');
+Route::get('/', "Site\SiteController@index")->name("home");
+Route::get('/home', "Panel\PanelController@index");
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/promocoes', "Site\SiteController@promotions")->name('promotions');
