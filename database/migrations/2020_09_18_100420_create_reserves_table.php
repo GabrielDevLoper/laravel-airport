@@ -15,6 +15,13 @@ class CreateReservesTable extends Migration
     {
         Schema::create('reserves', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('flight_id')->unsigned();
+            $table->date('date_reserved');
+            $table->enum('status', ['reserved', 'canceled', 'paid', 'conclueded']);
+            //chaves estrangeiras
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('flight_id')->references('id')->on('flights')->onDelete('cascade');
             $table->timestamps();
         });
     }
