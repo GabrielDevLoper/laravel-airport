@@ -15,7 +15,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return 'BrandController';
+        $title = "Marcas de Aviões";
+        return view("panel/brands/index", compact('title'));
     }
 
     /**
@@ -25,7 +26,8 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Cadastrando marca de aviões";
+        return view("panel/brands/create", compact('title'));
     }
 
     /**
@@ -37,6 +39,8 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         Brand::create($request->all());
+
+        return redirect()->back()->with('mensagem', "Avião cadastrado com sucesso");
     }
 
     /**
