@@ -16,7 +16,8 @@ class BrandController extends Controller
     public function index()
     {
         $title = "Marcas de Aviões";
-        return view("panel/brands/index", compact('title'));
+        $brands = Brand::all();
+        return view("panel/brands/index", compact('title', 'brands'));
     }
 
     /**
