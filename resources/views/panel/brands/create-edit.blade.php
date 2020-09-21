@@ -35,23 +35,20 @@
         @endif
 
         @if (isset($brand))
-            <form class="form form-search form-ds" action="{{ route('brands.update', $brand) }}" method="post">
-                {{ method_field('PUT') }}
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="Nome:" class="form-control" value="{{ $brand->name }}">
-                </div>
-
-            @else
-                <form class="form form-search form-ds" action="{{ route('brands.store') }}" method="post">
-                    <div class="form-group">
-                        <input type="text" name="name" placeholder="Nome:" class="form-control">
-                    </div>
+            {{ Form::open(['route' => ['brands.update', $brand], 'class' => 'form form-search form-ds', 'method' => 'PUT']) }}
+            <div class="form-group">
+                {{ Form::text('name', $brand->name, ['class' => 'form-control', 'placeholder' => 'Nome']) }}
+            </div>
+        @else
+            {{ Form::open(['route' => 'brands.store', 'class' => 'form form-search form-ds']) }}
+            <div class="form-group">
+                {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nome']) }}
+            </div>
         @endif
-        {{ csrf_field() }}
         <div class="form-group">
             <button class="btn btn-search">Enviar</button>
         </div>
-        </form>
+        {{ Form::close() }}
 
     </div>
     <!--Content Dinâmico-->
