@@ -23,7 +23,7 @@ class BrandController extends Controller
     public function index()
     {
         $title = "Marcas de Aviões";
-        $brands = Brand::all();
+        $brands = Brand::paginate(4);
         return view("panel/brands/index", compact('title', 'brands'));
     }
 
@@ -107,5 +107,12 @@ class BrandController extends Controller
         $brand->delete();
 
         return redirect()->back()->with('mensagem', "Marca excluida com sucesso");
+    }
+
+    public function search(Request $request)
+    {
+        $brands = $this->search($request);
+
+        return view('panel/brands/index', compact('brands'));
     }
 }

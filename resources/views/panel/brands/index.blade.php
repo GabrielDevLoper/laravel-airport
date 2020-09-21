@@ -16,12 +16,11 @@
     <div class="content-din bg-white">
 
         <div class="form-search">
-            <form class="form form-inline">
-                <input type="text" name="nome" placeholder="Nome:" class="form-control">
-                <input type="text" name="email" placeholder="E-mail:" class="form-control">
+            {{ Form::open(['route' => 'brands-search', 'class' => 'form form-inline']) }}
+            {{ Form::text('search', null, ['class' => 'form-control']) }}
 
-                <button class="btn btn-search">Pesquisar</button>
-            </form>
+            <button class="btn btn-search">Pesquisar</button>
+            {{ Form::close() }}
         </div>
 
         {{-- mensagem de sucesso ao excluir --}}
@@ -54,15 +53,10 @@
                 <tr>
                     <td>{{ $b->name }}</td>
                     <td>
-
                         <a href="{{ route('brands.edit', $b) }}" class="edit btn">Editar</a>
-
-                        <form action="{{ route('brands.destroy', $b) }}" method="post">
-                            {{ csrf_field() }}
-                            {{ method_field('delete') }}
-
-                            <button type="submit" class="delete btn">Excluir</button>
-                        </form>
+                        {{ Form::open(['route' => ['brands.destroy', $b], 'method' => 'delete']) }}
+                        <button type="submit" class="delete btn">Excluir</button>
+                        {{ Form::close() }}
                     </td>
                 </tr>
             @empty
@@ -71,27 +65,7 @@
                 </tr>
             @endforelse
         </table>
-
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
+        {{ $brands->links() }}
     </div>
     <!--Content Dinâmico-->
 
