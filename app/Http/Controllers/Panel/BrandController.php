@@ -4,10 +4,17 @@ namespace App\Http\Controllers\Panel;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BrandStoreAndUpdateFormRequest;
 use App\Models\Brand;
 
 class BrandController extends Controller
 {
+    private $brand;
+
+    public function __construct(Brand $brand)
+    {
+        $this->brand = $brand;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +35,7 @@ class BrandController extends Controller
     public function create()
     {
         $title = "Cadastrando marca de aviões";
-        return view("panel/brands/create", compact('title'));
+        return view("panel/brands/create-edit", compact('title'));
     }
 
     /**
@@ -37,11 +44,13 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BrandStoreAndUpdateFormRequest $request)
     {
-        Brand::create($request->all());
+        $insert = Brand::create($request->all());
 
-        return redirect()->back()->with('mensagem', "Avião cadastrado com sucesso");
+        if ($insert) {
+            return redirect()->back()->with('mensagem', "Marca cadastrada com sucesso");
+        }
     }
 
     /**
@@ -50,7 +59,7 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Brand $brand)
     {
         //
     }
@@ -60,10 +69,17 @@ class BrandController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * 
      */
-    public function edit($id)
+    public function edit(Brand $brand)
     {
-        //
+        if (!$brand) {
+            return redirect()->back();
+        }
+
+        $title = "Editar marca: {$brand->name}";
+
+        return view('panel/brands/create-edit', compact("title", "brand"));
     }
 
     /**
@@ -73,9 +89,11 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BrandStoreAndUpdateFormRequest $request, Brand $brand)
     {
-        //
+        $brand->update($request->all());
+
+        return redirect()->back()->with('mensagem', "Marca alterada com sucesso");
     }
 
     /**
@@ -84,8 +102,10 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();
+
+        return redirect()->back()->with('mensagem', "Marca excluida com sucesso");
     }
 }

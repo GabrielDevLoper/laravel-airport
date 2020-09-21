@@ -5,12 +5,12 @@
     <div class="bred">
         <a href="{{ route('home.panel') }}" class="bred">Home ></a>
         <a href="{{ route('brands.index') }}" class="bred">Marcas ></a>
-        <a href="{{ route('brands.create') }}" class="bred">Cadastrar</a>
+        <a href="{{ route('brands.edit', $brand) }}" class="bred">Editar</a>
     </div>
 
 
     <div class="title-pg">
-        <h1 class="title-pg">Cadastrar Aviões</h1>
+        <h1 class="title-pg">Editar marca: {{ $brand->name }}</h1>
     </div>
     <div class="content-din">
 
@@ -30,10 +30,12 @@
             </div>
         @endif
 
-        <form class="form form-search form-ds" action="{{ route('brands.store') }}" method="post">
+        <form class="form form-search form-ds" action="{{ route('brands.update', $brand) }}" method="post">
             {{ csrf_field() }}
+            {{ method_field('PUT') }}
+            <input type="hidden" name="id" value={{ $brand->id }}>
             <div class="form-group">
-                <input type="text" name="name" placeholder="Nome:" class="form-control">
+                <input type="text" name="name" placeholder="Nome:" class="form-control" value="{{ $brand->name }}">
             </div>
 
             <div class="form-group">

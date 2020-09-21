@@ -2,22 +2,12 @@
 
 @section('content')
 
+
+
     <div class="bred">
         <a href="" class="bred">Home ></a>
         <a href="" class="bred">Brands</a>
     </div>
-
-
-
-    <a href="" class="">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i> Cadastrar
-    </a>
-
-    <div class="title-pg">
-        <h1 class="title-pg">Marcas de Aviões</h1>
-    </div>
-
-
 
     <div class="title-pg">
         <h1 class="title-pg">Listagem dos aviões</h1>
@@ -34,6 +24,19 @@
             </form>
         </div>
 
+        {{-- mensagem de sucesso ao excluir --}}
+        @if (Session('mensagem'))
+            <div class="alert alert-success">
+                {{ Session('mensagem') }}
+            </div>
+        @endif
+
+        @if (Session('error'))
+            <div class="alert alert-error">
+                {{ Session('error') }}
+            </div>
+        @endif
+
         <div class="class-btn-insert">
             <a href="{{ route('brands.create') }}" class="btn-insert">
                 <span class="glyphicon glyphicon-plus"></span>
@@ -44,18 +47,29 @@
         <table class="table table-striped">
             <tr>
                 <th>Nome</th>
-                <th width="150">Ações</th>
+                <th width="200">Ações</th>
             </tr>
 
-            @foreach ($brands as $b)
+            @forelse ($brands as $b)
                 <tr>
                     <td>{{ $b->name }}</td>
                     <td>
-                        <a href="" class="edit">Edit</a>
-                        <a href="" class="delete">Delete</a>
+
+                        <a href="{{ route('brands.edit', $b) }}" class="edit btn">Editar</a>
+
+                        <form action="{{ route('brands.destroy', $b) }}" method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('delete') }}
+
+                            <button type="submit" class="delete btn">Excluir</button>
+                        </form>
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="200">Nenhuma marca cadastrada</td>
+                </tr>
+            @endforelse
         </table>
 
         <nav aria-label="Page navigation">
