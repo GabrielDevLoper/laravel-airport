@@ -12,6 +12,6 @@ class Brand extends Model
     {
         $keySearch = $request->search;
 
-        return $this->where('name', 'LIKE', "%{$keySearch}%")->get();
+        return $this->where('name', 'LIKE', "%{$keySearch}%")->paginate(10);
     }
 }
