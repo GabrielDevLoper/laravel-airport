@@ -9,10 +9,10 @@
 
     </div>
 
-
     <div class="title-pg">
         <h1 class="title-pg">{{ $brand->name }}</h1>
     </div>
+
     <div class="content-din">
         <div class="content-din">
             <ul>

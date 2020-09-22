@@ -10,7 +10,7 @@ use App\Models\Brand;
 class BrandController extends Controller
 {
     private $brand;
-    protected $totalPage = 5;
+    protected $pages = 5;
 
     public function __construct(Brand $brand)
     {
@@ -24,7 +24,7 @@ class BrandController extends Controller
     public function index()
     {
         $title = "Marcas de Aviões";
-        $brands = $this->brand->paginate($this->totalPage);
+        $brands = $this->brand->paginate($this->pages);
         return view("panel/brands/index", compact('title', 'brands'));
     }
 
@@ -113,7 +113,7 @@ class BrandController extends Controller
     public function search(Request $request)
     {
         $dataForm = $request->except('_token');
-        $brands = $this->brand->search($request->key_search);
+        $brands = $this->brand->search($request->key_search, $this->pages);
         // $title = "Brands, filtros para: {$request->key_search}";
         return view('panel.brands.index', compact('brands', 'dataForm'));
     }

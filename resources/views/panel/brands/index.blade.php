@@ -23,18 +23,10 @@
             {{ Form::close() }}
         </div>
 
-        {{-- mensagem de sucesso ao excluir --}}
-        @if (Session('mensagem'))
-            <div class="alert alert-success">
-                {{ Session('mensagem') }}
-            </div>
-        @endif
-
-        @if (Session('error'))
-            <div class="alert alert-error">
-                {{ Session('error') }}
-            </div>
-        @endif
+        {{-- mensagem de sucesso ao excluir e erros --}}
+        <div class="messages">
+            @include('panel.includes.alerts')
+        </div>
 
         <div class="class-btn-insert">
             <a href="{{ route('brands.create') }}" class="btn-insert">
@@ -55,10 +47,6 @@
                     <td>
                         <a href="{{ route('brands.edit', $b) }}" class="edit btn">Editar</a>
                         <a href="{{ route('brands.show', $b) }}" class="delete btn">Visualizar</a>
-                        {{--
-                        {{ Form::open(['route' => ['brands.destroy', $b], 'method' => 'delete']) }}
-                        <button type="submit" class="delete btn">Excluir</button>
-                        {{ Form::close() }} --}}
                     </td>
                 </tr>
             @empty
