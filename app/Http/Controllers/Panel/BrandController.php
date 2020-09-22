@@ -10,6 +10,7 @@ use App\Models\Brand;
 class BrandController extends Controller
 {
     private $brand;
+    protected $pages = 5;
 
     public function __construct(Brand $brand)
     {
@@ -23,7 +24,8 @@ class BrandController extends Controller
     public function index()
     {
         $title = "Marcas de Aviões";
-        $brands = Brand::paginate(10);
+
+        $brands = Brand::paginate($this->pages);
         return view("panel/brands/index", compact('title', 'brands'));
     }
 
@@ -111,7 +113,7 @@ class BrandController extends Controller
 
     public function search(Request $request)
     {
-        $brands = $this->brand->search($request);
+        $brands = $this->brand->search($request, $this->pages);
 
         return view('panel/brands/index', compact('brands'));
     }
