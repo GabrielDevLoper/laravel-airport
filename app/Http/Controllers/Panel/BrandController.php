@@ -10,7 +10,7 @@ use App\Models\Brand;
 class BrandController extends Controller
 {
     private $brand;
-    protected $pages = 5;
+    protected $totalPage = 5;
 
     public function __construct(Brand $brand)
     {
@@ -24,8 +24,7 @@ class BrandController extends Controller
     public function index()
     {
         $title = "Marcas de Aviões";
-
-        $brands = Brand::paginate($this->pages);
+        $brands = $this->brand->paginate($this->totalPage);
         return view("panel/brands/index", compact('title', 'brands'));
     }
 
@@ -48,7 +47,7 @@ class BrandController extends Controller
      */
     public function store(BrandStoreAndUpdateFormRequest $request)
     {
-        $insert = Brand::create($request->all());
+        $insert = $this->brand->create($request->all());
 
         if ($insert) {
             return redirect()->back()->with('mensagem', "Marca cadastrada com sucesso");
@@ -63,7 +62,7 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        //
+        return view("panel/brands/show", compact('brand'));
     }
 
     /**
@@ -108,13 +107,14 @@ class BrandController extends Controller
     {
         $brand->delete();
 
-        return redirect()->back()->with('mensagem', "Marca excluida com sucesso");
+        return redirect()->route('brands.index')->with('mensagem', "Marca deletada com sucesso");
     }
 
     public function search(Request $request)
     {
-        $brands = $this->brand->search($request, $this->pages);
-
-        return view('panel/brands/index', compact('brands'));
+        $dataForm = $request->except('_token');
+        $brands = $this->brand->search($request->key_search);
+        // $title = "Brands, filtros para: {$request->key_search}";
+        return view('panel.brands.index', compact('brands', 'dataForm'));
     }
 }

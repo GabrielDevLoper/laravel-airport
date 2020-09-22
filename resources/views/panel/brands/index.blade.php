@@ -16,8 +16,8 @@
     <div class="content-din bg-white">
 
         <div class="form-search">
-            {{ Form::open(['route' => 'brands-search', 'class' => 'form form-inline']) }}
-            {{ Form::text('search', null, ['class' => 'form-control']) }}
+            {{ Form::open(['route' => 'brands.search', 'class' => 'form form-inline']) }}
+            {{ Form::text('key_search', null, ['class' => 'form-control']) }}
 
             <button class="btn btn-search">Pesquisar</button>
             {{ Form::close() }}
@@ -54,9 +54,11 @@
                     <td>{{ $b->name }}</td>
                     <td>
                         <a href="{{ route('brands.edit', $b) }}" class="edit btn">Editar</a>
+                        <a href="{{ route('brands.show', $b) }}" class="delete btn">Visualizar</a>
+                        {{--
                         {{ Form::open(['route' => ['brands.destroy', $b], 'method' => 'delete']) }}
                         <button type="submit" class="delete btn">Excluir</button>
-                        {{ Form::close() }}
+                        {{ Form::close() }} --}}
                     </td>
                 </tr>
             @empty
@@ -65,7 +67,11 @@
                 </tr>
             @endforelse
         </table>
-        {{ $brands->links() }}
+        @if (isset($dataForm))
+            {{ $brands->appends($dataForm)->links() }}
+        @else
+            {{ $brands->links() }}
+        @endif
     </div>
     <!--Content Dinâmico-->
 
