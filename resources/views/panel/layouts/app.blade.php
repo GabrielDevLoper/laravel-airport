@@ -30,7 +30,7 @@
         <div class="list-menu">
             <ul class="menu-list">
                 <li>
-                    <a href="?pag=home">
+                    <a href="{{ route('home.panel') }}">
                         <i class="fa fa-home" aria-hidden="true"></i>
                         Home
                     </a>
@@ -42,6 +42,14 @@
                         Marcas
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{ route('planes.index') }}">
+                        <i class="fa fa-plane" aria-hidden="true"></i>
+                        Aviões
+                    </a>
+                </li>
+
 
 
             </ul>
