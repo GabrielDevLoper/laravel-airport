@@ -10,6 +10,9 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
     Route::resource('/planes', 'PlaneController');
 
 
+    Route::get('/states', 'StateController@index')->name("states.index");
+    Route::any('/states/buscar', 'StateController@search')->name("states.search");
+
     Route::get('/', "PanelController@index")->name("home.panel");
 });
 
