@@ -8,8 +8,13 @@ class State extends Model
 {
     public function search($keySearch)
     {
-        return $this->where('name', $keySearch)
+        return $this->where('name', 'LIKE', "%{$keySearch}%")
             ->orWhere('initials', $keySearch)
             ->get();
+    }
+
+    public function cities()
+    {
+        return $this->hasMany(City::class);
     }
 }

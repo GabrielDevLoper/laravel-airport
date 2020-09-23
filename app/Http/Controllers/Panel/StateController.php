@@ -17,7 +17,7 @@ class StateController extends Controller
     }
 
 
-    public function index()
+    public function index(State $state)
     {
         $states = $this->state->get();
         $title = "Estados";

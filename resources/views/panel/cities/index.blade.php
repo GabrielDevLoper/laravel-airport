@@ -3,14 +3,18 @@
 @section('content')
     <div class="bred">
         <a href="{{ route('home.panel') }}" class="bred">Home ></a>
-        <a href="{{ route('states.index') }}" class="bred">Estados </a>
+        <a href="{{ route('states.index') }}" class="bred">Estados ></a>
+        <a href="{{ route('states.cities', $state) }}" class="bred">{{ $state->name }} ></a>
+
+        <a href="" class="bred">Cidades </a>
+
     </div>
     <div class="title-pg">
-        <h1 class="title-pg">{{ $title }}</h1>
+        <h1 class="title-pg">Cidades do Estado: {{ $state->name }}</h1>
     </div>
     <div class="content-din bg-white">
         <div class="form-search">
-            {{ Form::open(['route' => 'states.search', 'class' => 'form form-inline']) }}
+            {{ Form::open(['route' => ['states.cities.search', $state], 'class' => 'form form-inline']) }}
             {{ Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'O que deseja encontrar?']) }}
 
             <button class="btn btn-search">Pesquisar</button>
@@ -23,23 +27,19 @@
         <table class="table table-striped">
             <tr>
                 <th>Nome</th>
-                <th>Siglas</th>
                 <th width="200">Ações</th>
             </tr>
 
-            @forelse ($states as $s)
+            @forelse ($cities as $c)
                 <tr>
-                    <td>{{ $s->name }}</td>
-                    <td>{{ $s->initials }}</td>
+                    <td>{{ $c->name }}</td>
                     <td>
-                        <a href="{{ route('states.cities', $s) }}" class="edit">
-                            <i class="fa fa-map-marker" aria-hidden="true"></i> Cidades
-                        </a>
+                        #ações
                     </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="200">Nenhum avião cadastrado</td>
+                    <td colspan="200">Nenhuma cidade encontrada</td>
                 </tr>
             @endforelse
         </table>
