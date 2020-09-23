@@ -25,8 +25,13 @@ class CityController extends Controller
         return view('panel/cities/index', compact('cities', 'state'));
     }
 
-    public function search(Request $request)
+    public function search(Request $request, State $state)
     {
+        $dataForm = $request->all();
         $keySearch = $request->key_search;
+
+        $cities = $state->searchCities($keySearch, $this->pages);
+
+        return view('panel/cities/index', compact('cities', 'state', 'dataForm'));
     }
 }

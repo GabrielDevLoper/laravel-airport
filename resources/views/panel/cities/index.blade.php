@@ -44,11 +44,11 @@
                 </tr>
             @endforelse
         </table>
-        {{-- @if (isset($dataForm))
-            {{ $planes->appends($dataForm)->links() }}
-            @else --}}
+        @if (isset($dataForm))
+            {{ $cities->appends($dataForm)->links() }}
+        @else
             {{ $cities->links() }}
-            {{-- @endif --}}
+        @endif
     </div>
     <!--Content Dinâmico-->
 

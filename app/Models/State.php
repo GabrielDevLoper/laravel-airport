@@ -13,6 +13,11 @@ class State extends Model
             ->get();
     }
 
+    public function searchCities($keySearch, $pages)
+    {
+        return $this->cities()->where('name', 'LIKE', "%{$keySearch}%")->paginate($pages);
+    }
+
     public function cities()
     {
         return $this->hasMany(City::class);
