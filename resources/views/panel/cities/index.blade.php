@@ -10,7 +10,8 @@
 
     </div>
     <div class="title-pg">
-        <h1 class="title-pg">Cidades do Estado: {{ $state->name }}</h1>
+        <h1 class="title-pg">Cidades do Estado: ({{ $cities->count() }} - {{ $cities->total() }})
+            <strong>{{ $state->name }}</strong></h1>
     </div>
     <div class="content-din bg-white">
         <div class="form-search">
@@ -43,7 +44,11 @@
                 </tr>
             @endforelse
         </table>
-
+        {{-- @if (isset($dataForm))
+            {{ $planes->appends($dataForm)->links() }}
+            @else --}}
+            {{ $cities->links() }}
+            {{-- @endif --}}
     </div>
     <!--Content Dinâmico-->
 

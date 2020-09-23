@@ -11,6 +11,7 @@ class CityController extends Controller
 {
 
     private $city;
+    private $pages = 20;
 
     public function __construct(City $city)
     {
@@ -20,7 +21,7 @@ class CityController extends Controller
     public function index(State $state)
     {
         $title = "Cidades";
-        $cities = $state->cities()->get();
+        $cities = $state->cities()->paginate($this->pages);
         return view('panel/cities/index', compact('cities', 'state'));
     }
 
