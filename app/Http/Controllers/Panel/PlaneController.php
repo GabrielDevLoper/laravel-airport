@@ -66,9 +66,10 @@ class PlaneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Plane $plane)
     {
-        //
+        $brand = $plane->brand->name;
+        return view('panel/planes/show', compact('plane', 'brand'));
     }
 
     /**
@@ -107,8 +108,11 @@ class PlaneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Brand $brand)
     {
+        $brand->delete();
+
+        return redirect()->route('planes.index')->with('mensagem', "Avião deletado com sucesso");
     }
 
     public function search(Request $request)

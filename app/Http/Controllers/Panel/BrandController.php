@@ -117,4 +117,13 @@ class BrandController extends Controller
         // $title = "Brands, filtros para: {$request->key_search}";
         return view('panel.brands.index', compact('brands', 'dataForm'));
     }
+
+    public function planes(Brand $brand)
+    {
+        $planes = $brand->planes()->get();
+
+        $title = "Aviões da marca: {$brand->name}";
+
+        return view('panel/brands/planes', compact('planes', 'title', 'brand'));
+    }
 }

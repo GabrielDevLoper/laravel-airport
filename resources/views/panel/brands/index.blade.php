@@ -47,6 +47,10 @@
                     <td>
                         <a href="{{ route('brands.edit', $b) }}" class="edit btn">Editar</a>
                         <a href="{{ route('brands.show', $b) }}" class="delete btn">Visualizar</a>
+                        <a href="{{ route('brands.planes', $b) }}" class="edit btn">
+                            <i class="fa fa-plane" aria-hidden="true"></i>
+                        </a>
+
                     </td>
                 </tr>
             @empty
