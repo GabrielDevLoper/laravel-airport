@@ -10,7 +10,7 @@ use App\Models\Brand;
 class BrandController extends Controller
 {
     private $brand;
-    protected $pages = 2;
+    protected $pages = 10;
 
     public function __construct(Brand $brand)
     {

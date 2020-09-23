@@ -17,7 +17,7 @@
 
         <div class="form-search">
             {{ Form::open(['route' => 'brands.search', 'class' => 'form form-inline']) }}
-            {{ Form::text('key_search', null, ['class' => 'form-control']) }}
+            {{ Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'O que deseja procurar?']) }}
 
             <button class="btn btn-search">Pesquisar</button>
             {{ Form::close() }}

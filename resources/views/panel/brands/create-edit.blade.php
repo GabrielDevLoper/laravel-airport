@@ -46,7 +46,7 @@
             </div>
         @endif
         <div class="form-group">
-            <button class="btn btn-search">Enviar</button>
+            <button class="btn btn-search">Salvar Mudanças</button>
         </div>
         {{ Form::close() }}
 

@@ -39,7 +39,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="200">Nenhum avião cadastrado</td>
+                    <td colspan="200">Nenhum estado cadastrado</td>
                 </tr>
             @endforelse
         </table>
