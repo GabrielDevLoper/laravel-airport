@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Panel;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PlaneStoreAndUpdateFormRequest;
 use App\Models\Brand;
 use App\Models\Plane;
 
 class PlaneController extends Controller
 {
     private $plane;
-    private $totalPage = 10;
+    private $pages = 2;
 
     public function __construct(Plane $plane)
     {
@@ -25,7 +26,7 @@ class PlaneController extends Controller
     {
         $title = "Listagem dos aviões";
 
-        $planes = $this->plane->with(['brand'])->paginate($this->totalPage);
+        $planes = $this->plane->with(['brand'])->paginate($this->pages);
 
         return view("panel/planes/index", compact('title', 'planes'));
     }
@@ -52,7 +53,7 @@ class PlaneController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PlaneStoreAndUpdateFormRequest $request)
     {
         $this->plane->create($request->all());
 
@@ -93,7 +94,7 @@ class PlaneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Plane $plane)
+    public function update(PlaneStoreAndUpdateFormRequest $request, Plane $plane)
     {
         $plane->update($request->all());
 
@@ -110,7 +111,14 @@ class PlaneController extends Controller
     {
     }
 
-    public function search()
+    public function search(Request $request)
     {
+        $dataForm = $request->except(['_token']);
+
+        $keySearch = $request->key_search;
+
+        $planes = $this->plane->search($keySearch, $this->pages);
+
+        return view('panel/planes/index', compact('planes'));
     }
 }

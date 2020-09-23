@@ -13,7 +13,7 @@ class PlaneStoreAndUpdateFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class PlaneStoreAndUpdateFormRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'              => 'required',
+            'brand_id'          => 'required|exists:brands,id',
+            'qty_passengers'    => 'required|integer',
+            'class'             => 'required|in:economic,luxury'
         ];
     }
 }

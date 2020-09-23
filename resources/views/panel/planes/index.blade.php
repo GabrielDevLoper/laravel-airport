@@ -13,12 +13,28 @@
     <div class="content-din bg-white">
 
         <div class="form-search">
-            {{-- {{ Form::open(['route' => 'planes.search', 'class' => 'form form-inline']) }}
-            {{ Form::text('key_search', null, ['class' => 'form-control']) }}
+            {{ Form::open(['route' => 'planes.search', 'class' => 'form form-inline']) }}
+            {{ Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'O que deseja encontrar?']) }}
 
             <button class="btn btn-search">Pesquisar</button>
-            {{ Form::close() }} --}}
+            {{ Form::close() }}
+
+
+            @if (isset($dataForm['key_search']))
+                <div class="alert alert-info">
+                    <p>
+                        <a href="{{ route('planes.index') }}">
+                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                            <strong>Resultados para: <strong>{{ $dataForm['key_search'] }}</strong> </strong>
+                        </a>
+                    </p>
+                </div>
+            @endif
+
+
         </div>
+
+
 
         {{-- mensagem de sucesso ao excluir e erros --}}
         <div class="messages">
