@@ -68,6 +68,7 @@ class FlightController extends Controller
     public function show(Flight $flight)
     {
         $flight->with(['origin', 'destination', 'planes']);
+
         return view('panel/flights/show', compact('flight'));
     }
 

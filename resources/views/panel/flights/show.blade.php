@@ -10,7 +10,7 @@
     </div>
 
     <div class="title-pg">
-        <h1 class="title-pg">{{ $flight->name }}</h1>
+        <h1 class="title-pg">Voo: {{ $flight->id }}</h1>
     </div>
 
     <div class="content-din">
@@ -33,23 +33,27 @@
                 </li>
 
                 <li>
-                    Data: <strong>{{ $flight->date }}</strong>
+                    Data: <strong>{{ formatDateAndTime($flight->date) }}</strong>
                 </li>
 
                 <li>
-                    Hora de chegada: <strong>{{ $flight->arrival_tbime }}</strong>
+                    Hora de chegada: <strong>{{ formatDateAndTime($flight->arrival_tbime, 'H:i') }}</strong>
                 </li>
 
                 <li>
-                    Hora de saída: <strong>{{ $flight->hour_output }}</strong>
+                    Hora de saída: <strong>{{ formatDateAndTime($flight->hour_output, 'H:i') }}</strong>
                 </li>
 
                 <li>
-                    Preço anterior: <strong>{{ $flight->old_price }}</strong>
+                    Preço anterior: <strong>R$: {{ number_format($flight->old_price, 2, ',', '.') }}</strong>
                 </li>
 
                 <li>
-                    Preço: <strong>{{ $flight->price }}</strong>
+                    Preço: <strong>R$: {{ number_format($flight->price, 2, ',', '.') }}</strong>
+                </li>
+
+                <li>
+                    Promoção: <strong>{{ $flight->is_promotion ? 'SIM' : 'NÃO' }}</strong>
                 </li>
 
                 <li>

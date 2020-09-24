@@ -58,8 +58,8 @@
                         </a>
                     </td>
                     <td>{{ $f->qty_stops }}</td>
-                    <td>{{ $f->date }}</td>
-                    <td>{{ $f->hour_output }}</td>
+                    <td>{{ formatDateAndTime($f->date) }}</td>
+                    <td>{{ formatDateAndTime($f->hour_output, 'H:i') }}</td>
                     <td>
                         <a href="{{ route('flights.edit', $f) }}" class="edit btn">Editar</a>
                         <a href="{{ route('flights.show', $f) }}" class="delete btn">Visualizar</a>
