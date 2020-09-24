@@ -31,9 +31,10 @@ class Flight extends Model
         return $this->with(['origin', 'destination'])->paginate($pages);
     }
 
-    public function newFlight(Request $request)
+    public function newFlight(Request $request, $nameFile)
     {
         $dataForm = $request->all();
+        $dataForm['image'] = $nameFile;
 
         return $this->create($dataForm);
     }
