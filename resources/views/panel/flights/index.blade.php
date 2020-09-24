@@ -5,8 +5,8 @@
 
 
     <div class="bred">
-        <a href="{{route('home.panel')}}" class="bred">Home ></a>
-        <a href="{{route('flights.index')}}" class="bred">Voos</a>
+        <a href="{{ route('home.panel') }}" class="bred">Home ></a>
+        <a href="{{ route('flights.index') }}" class="bred">Voos</a>
     </div>
 
     <div class="title-pg">
@@ -18,7 +18,6 @@
         <div class="form-search">
             {{ Form::open(['route' => 'brands.search', 'class' => 'form form-inline']) }}
             {{ Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'O que deseja procurar?']) }}
-
             <button class="btn btn-search">Pesquisar</button>
             {{ Form::close() }}
         </div>
@@ -29,7 +28,7 @@
         </div>
 
         <div class="class-btn-insert">
-            <a href="{{ route('brands.create') }}" class="btn-insert">
+            <a href="{{ route('flights.create') }}" class="btn-insert">
                 <span class="glyphicon glyphicon-plus"></span>
                 Cadastrar
             </a>
@@ -37,7 +36,6 @@
 
         <table class="table table-striped">
             <tr>
-                <th>Nome</th>
                 <th>Origem</th>
                 <th>Destino</th>
                 <th>Paradas</th>
@@ -48,9 +46,17 @@
 
             @forelse ($flights as $f)
                 <tr>
-                    <td>{{ $f->name }}</td>
-                    <td>{{ $f->airport_origin_id }}</td>
-                    <td>{{ $f->airport_destination_id }}</td>
+                    <td>
+                        <a href="">
+                            {{ $f->origin->name }}
+                        </a>
+                    </td>
+
+                    <td>
+                        <a href="">
+                            {{ $f->destination->name }}
+                        </a>
+                    </td>
                     <td>{{ $f->qty_stops }}</td>
                     <td>{{ $f->date }}</td>
                     <td>{{ $f->hour_output }}</td>

@@ -6,7 +6,7 @@
         <a href="{{ route('states.index') }}" class="bred">Estados </a>
     </div>
     <div class="title-pg">
-        <h1 class="title-pg">{{ $title }}</h1>
+        <h1 class="title-pg">{{ $title }}: {{ $states->total() }}</h1>
     </div>
     <div class="content-din bg-white">
         <div class="form-search">
@@ -43,7 +43,7 @@
                 </tr>
             @endforelse
         </table>
-
+        {{ $states->links() }}
     </div>
     <!--Content Dinâmico-->
 

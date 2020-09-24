@@ -10,6 +10,7 @@ class StateController extends Controller
 {
 
     private $state;
+    private $pages = 10;
 
     public function __construct(State $state)
     {
@@ -19,7 +20,7 @@ class StateController extends Controller
 
     public function index(State $state)
     {
-        $states = $this->state->get();
+        $states = $this->state->paginate($this->pages);
         $title = "Estados";
         return view('panel/states/index', compact('title', 'states'));
     }

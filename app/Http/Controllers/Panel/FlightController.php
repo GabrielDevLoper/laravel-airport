@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Panel;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Airport;
 use App\Models\Flight;
+use App\Models\Plane;
 
 class FlightController extends Controller
 {
-
     private $flight;
     private $pages = 10;
 
@@ -26,7 +27,7 @@ class FlightController extends Controller
     public function index()
     {
         $title = "Voos disponíveis";
-        $flights = $this->flight->paginate($this->pages);
+        $flights = $this->flight->getItems($this->pages);
         return view('panel/flights/index', compact('title', 'flights'));
     }
 
@@ -37,7 +38,11 @@ class FlightController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Cadastrar voos";
+        $airports = Airport::pluck('name', 'id');
+        $planes = Plane::pluck('name', 'id');
+
+        return view('panel/flights/create', compact('title', 'planes', 'airports'));
     }
 
     /**
@@ -48,7 +53,11 @@ class FlightController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $insert = $this->flight->newFlight($request);
+
+        if ($insert) {
+            return redirect()->back()->with('mensagem', "Voo cadastrado com sucesso");
+        }
     }
 
     /**
