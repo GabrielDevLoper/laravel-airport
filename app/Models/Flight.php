@@ -46,4 +46,9 @@ class Flight extends Model
     {
         return $this->belongsTo(Airport::class, 'airport_destination_id');
     }
+
+    public function planes()
+    {
+        return $this->belongsTo(Plane::class, 'plane_id');
+    }
 }
