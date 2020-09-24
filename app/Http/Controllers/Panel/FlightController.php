@@ -15,7 +15,6 @@ class FlightController extends Controller
 
     public function __construct(Flight $flight)
     {
-
         $this->flight = $flight;
     }
 
@@ -77,9 +76,11 @@ class FlightController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Flight $flight)
     {
-        //
+        $airports = Airport::pluck('name', 'id');
+        $planes = Plane::pluck('name', 'id');
+        return view('panel/flights/edit', compact('flight', 'airports', 'planes'));
     }
 
     /**
@@ -89,9 +90,13 @@ class FlightController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Flight $flight)
     {
-        //
+        $updated = $flight->update($request->all());
+
+        if ($updated) {
+            return redirect()->back()->with('mensagem', "Voo editado com sucesso");
+        }
     }
 
     /**
