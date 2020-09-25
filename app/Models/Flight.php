@@ -68,4 +68,29 @@ class Flight extends Model
 
         return $this->update($dataForm);
     }
+
+
+    public function search(Request $request, $pages)
+    {
+        $flights = $this->where(function ($query) use ($request) {
+            $code = $request->code;
+            $date = $request->date;
+            $qty_stops = $request->qty_stops;
+
+            if ($code) {
+                $query->where('id', $code);
+            }
+
+            if ($date) {
+                $query->where('date', '>=', $date);
+            }
+
+            if ($qty_stops) {
+                $query->where('qty_stops', $qty_stops);
+            }
+        })->paginate($pages);
+
+
+        return $flights;
+    }
 }

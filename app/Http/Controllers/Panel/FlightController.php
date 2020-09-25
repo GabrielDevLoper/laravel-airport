@@ -136,4 +136,16 @@ class FlightController extends Controller
         $flight->delete();
         return redirect()->route('flights.index')->with('mensagem', "Voo deletado com sucesso");
     }
+
+
+    public function search(Request $request)
+    {
+        $flights = $this->flight->search($request, $this->pages);
+
+        $dataForm = $request->except('_token');
+        $airports = Airport::pluck('name', 'id');
+        $planes = Plane::pluck('name', 'id');
+
+        return view('panel/flights/index', compact('flights', 'airports', 'planes'));
+    }
 }

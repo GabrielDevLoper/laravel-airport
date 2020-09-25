@@ -16,11 +16,30 @@
     <div class="content-din bg-white">
 
         <div class="form-search">
-            {{ Form::open(['route' => 'brands.search', 'class' => 'form form-inline']) }}
-            {{ Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'O que deseja procurar?']) }}
+            {{ Form::open(['route' => 'flights.search', 'class' => 'form form-inline']) }}
+            {{ Form::number('code', null, ['class' => 'form-control', 'placeholder' => 'Código do voo']) }}
+            {{ Form::date('date', null, ['class' => 'form-control']) }}
+            {{ Form::number('qty_stops', null, ['class' => 'form-control', 'placeholder' => 'Total de paradas']) }}
+
+
+            {{ Form::select('airport_origin_id', $airports, null, ['class' => 'form-control']) }}
+            {{ Form::select('airport_destination_id', $airports, null, ['class' => 'form-control']) }}
+
             <button class="btn btn-search">Pesquisar</button>
             {{ Form::close() }}
         </div>
+
+
+        @if (isset($dataForm))
+            <div class="alert alert-info">
+                <p>
+                    <a href="{{ route('flights.index') }}">
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                    </a>
+                    Resultados para: <strong>{{ $dataForm }}</strong>
+                </p>
+            </div>
+        @endif
 
         {{-- mensagem de sucesso ao excluir e erros --}}
         <div class="messages">
