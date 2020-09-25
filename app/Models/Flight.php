@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 class Flight extends Model
 {
 
+    protected $casts = [
+        'is_promotion' => 'boolean',
+    ];
+
+
     protected $fillable = [
         'plane_id',
         'airport_origin_id',
