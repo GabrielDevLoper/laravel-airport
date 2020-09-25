@@ -23,6 +23,22 @@ class FlightStoreAndUpdateFormRequest extends FormRequest
      */
     public function rules()
     {
-        return [];
+        return [
+            'plane_id'                  => 'required|exists:planes,id',
+            'airport_origin_id'         => 'required|exists:airports,id',
+            'airport_destination_id'    => 'required|exists:airports,id',
+            'date'                      => 'required|date|after:today',
+            'time_duration'             => 'required',
+            'hour_output'               => 'required',
+            'hour_output'               => 'required',
+            'arrival_tbime'             => 'required',
+            'old_price'                 => 'required',
+            'price'                     => 'required',
+            'total_plots'               => 'required|digits_between:1,12',
+            'is_promotion'              => 'boolean',
+            'image'                     => 'image',
+            'qty_stops'                 => 'numeric',
+            'description'               => 'min:3|max:1000'
+        ];
     }
 }
