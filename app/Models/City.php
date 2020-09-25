@@ -11,6 +11,15 @@ class City extends Model
     {
         return $this->belongsTo(State::class);
     }
+
+    public function airports()
+    {
+        return $this->hasMany(Airport::class);
+    }
+
+    //hasMany 1:N
+    //belongsTo N:1
+
     public function search($keySearch)
     {
     }

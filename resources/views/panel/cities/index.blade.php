@@ -35,7 +35,10 @@
                 <tr>
                     <td>{{ $c->name }}</td>
                     <td>
-                        #ações
+                        <a href="" class="edit">
+                            <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+                            Aeroportos
+                        </a>
                     </td>
                 </tr>
             @empty
