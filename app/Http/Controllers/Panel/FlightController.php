@@ -103,10 +103,25 @@ class FlightController extends Controller
      */
     public function update(Request $request, Flight $flight)
     {
-        $updated = $flight->update($request->all());
+        $nameFile = $flight->image;
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+
+            if ($flight->image) {
+                $nameFile = $flight->image;
+            } else {
+                $nameFile = uniqid(date('HisYmd')) . '.' . $request->image->extension();
+            }
+
+            if (!$request->image->storeAs('flights', $nameFile)) {
+                return redirect()->back()->with('error', "Falha ao realizar upload");
+            }
+        }
+
+        $updated = $flight->updateFlight($request, $nameFile);
 
         if ($updated) {
-            return redirect()->back()->with('mensagem', "Voo editado com sucesso");
+            return redirect()->route('flights.index')->with('mensagem', "Voo editado com sucesso");
         }
     }
 

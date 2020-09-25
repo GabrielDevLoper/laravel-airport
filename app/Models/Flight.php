@@ -59,4 +59,13 @@ class Flight extends Model
 
     //     return Carbon::parse($value)->format('d/m/Y');
     // }
+
+    public function updateFlight(Request $request, $nameFile = '')
+    {
+
+        $dataForm = $request->all();
+        $dataForm['image'] = $nameFile;
+
+        return $this->update($dataForm);
+    }
 }
