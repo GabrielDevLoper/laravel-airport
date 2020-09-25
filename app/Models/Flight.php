@@ -76,6 +76,8 @@ class Flight extends Model
             $code = $request->code;
             $date = $request->date;
             $qty_stops = $request->qty_stops;
+            $airport_origin_id = $request->airport_origin_id;
+            $airport_destination_id = $request->airport_destination_id;
 
             if ($code) {
                 $query->where('id', $code);
@@ -88,7 +90,15 @@ class Flight extends Model
             if ($qty_stops) {
                 $query->where('qty_stops', $qty_stops);
             }
-        })->paginate($pages);
+
+            if ($airport_origin_id) {
+                $query->where('airport_origin_id', $airport_origin_id);
+            }
+
+            if ($airport_destination_id) {
+                $query->where('airport_destination_id', $airport_destination_id);
+            }
+        })->with(['origin', 'destination'])->paginate($pages);
 
 
         return $flights;

@@ -22,8 +22,8 @@
             {{ Form::number('qty_stops', null, ['class' => 'form-control', 'placeholder' => 'Total de paradas']) }}
 
 
-            {{ Form::select('airport_origin_id', $airports, null, ['class' => 'form-control']) }}
-            {{ Form::select('airport_destination_id', $airports, null, ['class' => 'form-control']) }}
+            {{ Form::select('airport_origin_id', $airports, null, ['class' => 'form-control', 'placeholder' => 'Selecione o aeroporto']) }}
+            {{ Form::select('airport_destination_id', $airports, null, ['class' => 'form-control', 'placeholder' => 'Selecione o aeroporto']) }}
 
             <button class="btn btn-search">Pesquisar</button>
             {{ Form::close() }}

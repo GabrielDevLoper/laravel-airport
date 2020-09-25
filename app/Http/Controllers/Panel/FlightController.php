@@ -27,7 +27,9 @@ class FlightController extends Controller
     {
         $title = "Voos disponíveis";
         $flights = $this->flight->getItems($this->pages);
-        return view('panel/flights/index', compact('title', 'flights'));
+        $airports = Airport::pluck('name', 'id');
+
+        return view('panel/flights/index', compact('title', 'flights', 'airports'));
     }
 
     /**
@@ -39,6 +41,7 @@ class FlightController extends Controller
     {
         $title = "Cadastrar voos";
         $airports = Airport::pluck('name', 'id');
+
         $planes = Plane::pluck('name', 'id');
 
         return view('panel/flights/create', compact('title', 'planes', 'airports'));
@@ -144,8 +147,7 @@ class FlightController extends Controller
 
         $dataForm = $request->except('_token');
         $airports = Airport::pluck('name', 'id');
-        $planes = Plane::pluck('name', 'id');
 
-        return view('panel/flights/index', compact('flights', 'airports', 'planes'));
+        return view('panel/flights/index', compact('flights', 'airports'));
     }
 }
