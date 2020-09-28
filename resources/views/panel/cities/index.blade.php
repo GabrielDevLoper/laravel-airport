@@ -35,7 +35,7 @@
                 <tr>
                     <td>{{ $c->name }}</td>
                     <td>
-                        <a href="" class="edit">
+                        <a href="{{ route('airports.index', $c) }}" class="edit">
                             <i class="fa fa-thumb-tack" aria-hidden="true"></i>
                             Aeroportos
                         </a>

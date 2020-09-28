@@ -12,6 +12,7 @@ class AirportController extends Controller
 
     private $airport;
     private $city;
+    private $pages = 10;
 
     public function __construct(Airport $aiport, City $city)
     {
@@ -25,11 +26,11 @@ class AirportController extends Controller
      */
     public function index(City $city)
     {
-        $aiports = $city->aiports()->getItems();
+        $airports = $city->airports()->paginate($this->pages);
         $title = "Aeroportos da cidade: {$city->name}";
 
 
-        return view('panel/aiports/index', compact('title', 'aiports'));
+        return view('panel/airports/index', compact('title', 'airports', 'city'));
     }
 
     /**
@@ -37,9 +38,10 @@ class AirportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(City $city)
     {
-        //
+        $title = "Cadastrar novo aeroporto na cidade: {$city->name}";
+        return view('panel/airports/create', compact('title', 'city'));
     }
 
     /**
