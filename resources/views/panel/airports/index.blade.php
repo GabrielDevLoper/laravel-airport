@@ -35,7 +35,7 @@
         <table class="table table-striped">
             <tr>
                 <th>Nome</th>
-                <th>Endereçoc</th>
+                <th>Endereço</th>
                 <th width="200">Ações</th>
             </tr>
 
