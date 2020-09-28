@@ -25,6 +25,8 @@ class AlterNameTableReserves extends Migration
      */
     public function down()
     {
-        Schema::rename("reservess", "reserves");
+        if (Schema::hasTable('reserves')) {
+            Schema::rename("reservess", "reserves");
+        }
     }
 }
