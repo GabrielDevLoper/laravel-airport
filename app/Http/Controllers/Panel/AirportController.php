@@ -29,7 +29,6 @@ class AirportController extends Controller
         $airports = $city->airports()->paginate($this->pages);
         $title = "Aeroportos da cidade: {$city->name}";
 
-
         return view('panel/airports/index', compact('title', 'airports', 'city'));
     }
 
@@ -41,6 +40,7 @@ class AirportController extends Controller
     public function create(City $city)
     {
         $title = "Cadastrar novo aeroporto na cidade: {$city->name}";
+        $city->pluck('name', 'id');
         return view('panel/airports/create', compact('title', 'city'));
     }
 
@@ -50,20 +50,23 @@ class AirportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, City $city)
     {
-        //
-    }
+        if ($this->airport->create($request->all())) {
+            return redirect()->route('airports.index', $city)->with('mensagem', 'Aeroporto cadastrado com sucesso');
+        }
 
+        return redirect()->back()->withInput();
+    }
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(City $city, Airport $airport)
     {
-        //
+        return view('panel/airports/show', compact('city', 'airport'));
     }
 
     /**
@@ -95,8 +98,9 @@ class AirportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(City $city, Airport $airport)
     {
-        //
+        $airport->delete();
+        return redirect()->route('airports.index', $city)->with('mensagem', 'Aeroporto deletado com sucesso');
     }
 }

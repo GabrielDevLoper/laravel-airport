@@ -4,7 +4,7 @@
 
     <div class="bred">
         <a href="{{ route('home.panel') }}" class="bred">Home ></a>
-        <a href="{{ route('cities.show', $city) }}" class="bred">Cidade: {{ $city->name }} ></a>
+        <a href="{{ route('airports.index', $city) }}" class="bred">Cidade {{ $city->name }} ></a>
     </div>
 
 
@@ -29,7 +29,7 @@
             </div>
         @endif
 
-        {{ Form::open(['route' => 'airports.store', 'class' => 'form form-search form-ds']) }}
+        {{ Form::open(['route' => ['airports.store', $city], 'class' => 'form form-search form-ds']) }}
         @include('panel.airports.form')
 
         {{ Form::close() }}
