@@ -75,9 +75,9 @@ class AirportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(City $city, Airport $airport)
     {
-        //
+        return view('panel/airports/edit', compact('city', 'airport'));
     }
 
     /**
@@ -87,9 +87,10 @@ class AirportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, City $city, Airport $airport)
     {
-        //
+        $airport->update($request->all());
+        return redirect()->route('airports.index', $city)->with('mensagem', 'Aeroporto alterado com sucesso');
     }
 
     /**

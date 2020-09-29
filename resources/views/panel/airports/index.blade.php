@@ -39,13 +39,13 @@
                 <th width="200">Ações</th>
             </tr>
 
-            @forelse ($airports as $a)
+            @forelse ($airports as $airport)
                 <tr>
-                    <td>{{ $a->name }}</td>
-                    <td>{{ $a->address }}</td>
+                    <td>{{ $airport->name }}</td>
+                    <td>{{ $airport->address }}</td>
                     <td>
-                        <a href="{{ route('airports.edit', [$city, $a]) }}" class="edit btn">Editar</a>
-                        <a href="{{ route('airports.show', [$city, $a]) }}" class="delete btn">Visualizar</a>
+                        <a href="{{ route('airports.edit', [$city, $airport]) }}" class="edit btn">Editar</a>
+                        <a href="{{ route('airports.show', [$city, $airport]) }}" class="delete btn">Visualizar</a>
 
                     </td>
                 </tr>

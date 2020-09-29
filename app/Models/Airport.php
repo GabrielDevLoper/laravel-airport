@@ -16,4 +16,9 @@ class Airport extends Model
         'zip_code',
         'complement'
     ];
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 }
